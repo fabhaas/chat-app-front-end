@@ -1,0 +1,49 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && concurrently \"tsc -w\" \"node server/app.js\"",
+    "tsc:w": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elias Sandner",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "@angular/common": "~2.4.0",
+    "@angular/compiler": "~2.4.0",
+    "@angular/core": "~2.4.0",
+    "@angular/forms": "~2.4.0",
+    "@angular/http": "~2.4.0",
+    "@angular/platform-browser": "~2.4.0",
+    "@angular/platform-browser-dynamic": "~2.4.0",
+    "@angular/router": "~3.4.0",
+    "angular-in-memory-web-api": "~0.2.4",
+    "body-parser": "^1.18.3",
+    "core-js": "^2.4.1",
+    "rxjs": "5.4.2",
+    "systemjs": "0.19.40",
+    "zone.js": "0.7.4"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.11",
+    "@types/node": "^6.0.46",
+    "canonical-path": "0.0.2",
+    "concurrently": "^3.1.0",
+    "http-server": "^0.11.1",
+    "jasmine-core": "~2.4.1",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-cli": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "lite-server": "^2.2.2",
+    "lodash": "^4.16.4",
+    "protractor": "^5.4.2",
+    "rimraf": "^2.5.4",
+    "tslint": "^3.15.1",
+    "typescript": "~3.1.6"
+  }
+}
