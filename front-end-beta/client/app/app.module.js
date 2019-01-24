@@ -14,7 +14,7 @@ var router_1 = require("@angular/router");
 //Eigene Angular-Components müssen hier importiert und unter declarations deklariert werden 
 var app_component_1 = require("./app.component");
 var header_component_1 = require("./elements/header.component");
-var login_component_1 = require("./pages/login.component");
+var login_component_1 = require("./pages/login/login.component");
 var home_component_1 = require("./pages/home.component");
 var chat_component_1 = require("./pages/chat.component");
 var friend_component_1 = require("./elements/friend.component");
@@ -47,7 +47,7 @@ var AppModule = /** @class */ (function () {
                 friend_component_1.FriendComponent,
                 nachricht_component_1.NachrichtComponent
             ],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
         })
     ], AppModule);
     return AppModule;

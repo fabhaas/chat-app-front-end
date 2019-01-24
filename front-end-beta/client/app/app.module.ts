@@ -10,12 +10,11 @@ import{RouterModule} from '@angular/router'
 //Eigene Angular-Components müssen hier importiert und unter declarations deklariert werden 
 import { AppComponent }  from './app.component';
 import { HeaderComponent } from './elements/header.component';
-import { LoginComponent } from './pages/login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home.component';
 import { ChatComponent } from './pages/chat.component';
 import { FriendComponent } from './elements/friend.component';
 import { NachrichtComponent } from './elements/nachricht.component';
-
 
 
 
@@ -49,6 +48,7 @@ import { NachrichtComponent } from './elements/nachricht.component';
       NachrichtComponent
       
     ],
-    bootstrap: [ AppComponent ]
+    bootstrap: [ AppComponent ],
+
   })
   export class AppModule {   }

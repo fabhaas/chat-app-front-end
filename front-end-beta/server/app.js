@@ -5,6 +5,11 @@ var path=require("path")
 const hostname = '127.0.0.1'; //=Localhost
 const port = 3010;
 
+//CORS NOT NEEDED__DELETE LATER!!
+let cors = require('cors')
+app.use(cors()); // allow all origins -> Access-Control-Allow-Origin: *
+
+
 //Statische Dateien für Polifills ausliefern
 var nodeModulesPath=path.join(__dirname, "..","node_modules");
 app.use("/node_modules", express.static(nodeModulesPath)); //static express middleware 
@@ -17,9 +22,9 @@ app.use("/client", express.static(clientPath)); //static express middleware
 
 //Seiten zu URL verlinken 
 
-app.get("/",function(req, res) {
-    res.sendFile(__dirname+"/views/index.html")
-})
+            app.get("/",function(req, res) {
+                res.sendFile(__dirname+"/views/index.html")
+            })
 
 
 
