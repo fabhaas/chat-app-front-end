@@ -42,6 +42,7 @@ var HomeComponent = /** @class */ (function () {
         // xhttp.setRequestHeader("Authorization", "TOKEN !!!??");//TOKEN FROM LOGIN 
         xhttp.setRequestHeader("cache-control", "no-cache");
         xhttp.setRequestHeader("Authorization", "d679bb8b6cef80ddb7b376bf2799d8f3b1ceb49e27c8bd4b4c968d74d7df4bf294847252fd425afdcc2c03e6b772f9fe1682f97250ddcdc52da76b1805992fd57c93895944657bfabc022bf7571e598227da16eec10a663dbf7339c1793862feb3abadfe6630de558323d920d7983fbf1893427112b65142ca04ce5ed0fc80a9a90d7c033ff9a9ee4e8b2d93fd68243693dd4ccb61568ce8df636b00a516b5ee5582c774159c1fa9a8b1db50d7b24eda1db037213b9052d858fb4dd172eac596f25a6");
+        //Nächster Versuch: Body mithilfe von Fabians Test Datei korrikieren 
         xhttp.send(JSON.stringify({ name: "test0", token: "d679bb8b6cef80ddb7b376bf2799d8f3b1ceb49e27c8bd4b4c968d74d7df4bf294847252fd425afdcc2c03e6b772f9fe1682f97250ddcdc52da76b1805992fd57c93895944657bfabc022bf7571e598227da16eec10a663dbf7339c1793862feb3abadfe6630de558323d920d7983fbf1893427112b65142ca04ce5ed0fc80a9a90d7c033ff9a9ee4e8b2d93fd68243693dd4ccb61568ce8df636b00a516b5ee5582c774159c1fa9a8b1db50d7b24eda1db037213b9052d858fb4dd172eac596f25a6" }));
     };
     HomeComponent = __decorate([

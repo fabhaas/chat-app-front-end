@@ -3,8 +3,9 @@ import { NgModule }      from '@angular/core';
 import {HttpModule }      from '@angular/http';
 import {FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
 import{RouterModule} from '@angular/router'
+
+
 
 
 //Eigene Angular-Components müssen hier importiert und unter declarations deklariert werden 
@@ -26,6 +27,7 @@ import { NachrichtComponent } from './elements/nachricht.component';
       BrowserModule,
       FormsModule,
       HttpModule,
+      
       //Links zu den verschiedenen Pages
       RouterModule.forRoot([ 
         {path: '', component: LoginComponent},
