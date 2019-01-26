@@ -50,5 +50,9 @@ import { NachrichtComponent } from './elements/nachricht.component';
     ],
     bootstrap: [ AppComponent ],
 
+    providers: [
+      LoginComponent
+    ]
+
   })
   export class AppModule {   }

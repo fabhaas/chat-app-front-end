@@ -48,6 +48,9 @@ var AppModule = /** @class */ (function () {
                 nachricht_component_1.NachrichtComponent
             ],
             bootstrap: [app_component_1.AppComponent],
+            providers: [
+                login_component_1.LoginComponent
+            ]
         })
     ], AppModule);
     return AppModule;

@@ -19,47 +19,74 @@ var LoginComponent = /** @class */ (function () {
             serverHost: "localhost",
             serverPort: 3000,
             loginRoute: "login",
-            localUserInfo: "wt18user",
-            cookieExpiry: 3600000,
+            localUsername: "localuser",
+            cookieExpiry: 3600000 //Cookie ist eine Stunde gültig
         };
     }
-    LoginComponent.prototype.checkValidInput = function () {
+    LoginComponent.prototype.getConfig = function () {
+        return this.config;
+    };
+    LoginComponent.prototype.createCookie = function (jsonData) {
+        //Time Calc
+        var now = new Date(); //Current Time 
+        var time = now.getTime(); //now.getTime() returns number of milliseconds between January1, 1970 and now. 
+        time += this.config.cookieExpiry;
+        now.setTime(time); //now = jetzt + cookieExpiry (1h)
+        var token = JSON.stringify(jsonData).split("\""); //Splitted JSON String auf, Element mit Index 3 ist der Token-Wert
+        document.cookie = //Cookie wird als String-Attribut des Document Elements gespeichert 
+            this.config.localUsername + '=' + token[3] + //Cookie mit name=username und value ={"toke":"abcTOKENabc"}
+                +';expires=' + now.toUTCString() + '; '
+                + ';path=/';
+        console.log(token[3]);
+    };
+    LoginComponent.prototype.deleteCookie = function () {
+        //delete cookie
+        console.log(this.config.localUsername);
+        document.cookie = this.config.localUsername + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+        console.log(document.cookie);
+    };
+    LoginComponent.prototype.checkValidInput = function (username, password) {
         var validInput = true;
-        if (!document.getElementById("login_username").checkValidity()) {
+        if (!username.checkValidity()) {
             alert("Please enter Username");
             validInput = false;
         }
-        if (!document.getElementById("login_password").checkValidity()) {
+        if (!password.checkValidity()) {
             alert("Please enter a password!");
             validInput = false;
         }
         return validInput;
     };
     LoginComponent.prototype.Login = function () {
-        if (!this.checkValidInput())
-            return; //Check validity generates some errors 
-        var loginUrl = "http://" + this.config.serverHost + ":" + this.config.serverPort + "/" + this.config.loginRoute + "/" + document.getElementById("login_username").value; // http://localhost:3000/login/USERNAME 
-        var router = this.router; //needed because this.router can't be used in XMLHttpRequest ("this" reffers to XMLHttpRequest!)
+        var _this = this;
+        var username = document.getElementById("login_username");
+        var pass = document.getElementById("login_password");
+        if (!this.checkValidInput(username, pass))
+            return;
+        var loginUrl = "http://" + this.config.serverHost + ":" + this.config.serverPort + "/" + this.config.loginRoute + "/" + username.value; // http://localhost:3000/login/USERNAME 
         var xhttp = new XMLHttpRequest();
-        xhttp.addEventListener("readystatechange", function () {
-            if (this.readyState === 4) {
-                if (this.status == 200) {
-                    //Ergebnis empfangen - und jetzt?? 
-                    alert("Login succeeded - Welcome to LetsChat");
-                    console.log(this.responseText);
-                    router.navigate(["/home"]);
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4) {
+                if (xhttp.status == 200) { //Response erhalten
+                    //alert("Login succeeded - Welcome to LetsChat");
+                    //this.config.localUsername=username.value;
+                    var jsonResponseData = JSON.parse(xhttp.response);
+                    _this.createCookie(jsonResponseData); //Übergibt Token als String an createCookie
+                    if (document.cookie) {
+                        _this.router.navigate(["/home"]);
+                    }
                 }
                 else if (xhttp.status === 400)
                     alert("Error occured!");
                 else if (xhttp.status === 401)
                     alert("Login failed!");
             }
-        });
+        };
         //Request:
         xhttp.open("POST", loginUrl);
         xhttp.setRequestHeader("Content-Type", "application/json");
         xhttp.send(JSON.stringify({
-            password: document.getElementById("login_password").value
+            password: pass.value
         }));
     };
     LoginComponent = __decorate([
