@@ -1,0 +1,7 @@
+<mat-action-list>
+  <button mat-list-item *ngFor="let friend of friends" (click)="openFriend(friend)"> {{friend[0]}} <mat-icon mat-suffix>
+      {{friend[1] ? 'done' : ''}} </mat-icon> </button>
+  <mat-divider></mat-divider>
+  <button mat-list-item *ngFor="let group of groups" (click)="openGroup(group)"> {{group[1]}} <mat-icon mat-suffix>
+      {{group[3] ? 'done' : ''}} </mat-icon> </button>
+</mat-action-list>

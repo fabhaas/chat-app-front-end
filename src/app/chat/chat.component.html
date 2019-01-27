@@ -1,0 +1,11 @@
+<div class="chat">
+  <mat-chip-list class="mat-chip-list-stacked">
+    <div *ngFor="let message of messages">
+      <mat-chip [color]="message[1] === friend ? 'primary' : 'accent'" selected>
+        {{message[2]}}
+        <br>
+        {{message[3]}}
+      </mat-chip>
+    </div>
+  </mat-chip-list>
+</div>

@@ -1,0 +1,8 @@
+.chat {
+    margin: 20px;
+}
+
+mat-chip {
+    text-align: center;
+    height: 50px;
+}
