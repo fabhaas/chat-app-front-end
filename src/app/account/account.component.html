@@ -1,0 +1,17 @@
+<div class="account_form">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> {{username}} </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <button mat-raised-button (click)="changeUsername()">Change username</button>
+          <br>
+          <button mat-raised-button (click)="changePassword()">Change password</button>
+          <br>
+          <br>
+          <button id="btnBack" mat-raised-button onclick="window.history.back()" color="primary">Back</button>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </div>

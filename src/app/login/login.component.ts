@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService, LoginResult } from './login.service';
-import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +10,36 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  hide = true;
-  username = '';
-  password = '';
+  private hide = true;
+  private username = '';
+  private password = '';
+
+  constructor(
+    private loginService: LoginService,
+    private configService: ConfigService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   login() {
     this.loginService.login(this.username, this.password)
       .subscribe(
         (data: LoginResult) => {
-          this.cookieService.set('token', data.token);
-          this.cookieService.set('username', this.username);
-          console.log(`Token: ${this.cookieService.get('token')}`);
+          this.configService.setToken(data.token);
+          this.configService.setUsername(this.username);
           this.router.navigate(['/home']);
-        }, err => alert(err));
+        }, err => this.snackBar.open(err, 'OK', {
+          duration: 3000
+        }));
   }
 
-  constructor(private loginService: LoginService, private cookieService: CookieService, private router: Router) { }
+  register() {
+    this.loginService.register(this.username, this.password)
+      .subscribe(
+        (data: LoginResult) => {
+          this.login();
+        }, err => this.snackBar.open(err, 'OK', {
+          duration: 3000
+        }));
+  }
 }

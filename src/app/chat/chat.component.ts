@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChatService } from './chat.service';
-import { CookieService } from 'ngx-cookie-service';
+import { ChatService, Message } from '../chat.service';
+import { WebSocketService } from '../websocket.service';
+import { DataSource } from '@angular/cdk/table';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { ConfigService } from '../config.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-chat',
@@ -10,33 +14,96 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ChatComponent implements OnInit {
   friend: string;
-  messages: Array<any[]>;
+  messages: ChatDataSource;
+  displayedColumns = ['user', 'msg', 'timestamp'];
 
   constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private cookieService: CookieService,
-              private chatService: ChatService) { }
+    private activatedRoute: ActivatedRoute,
+    private configService: ConfigService,
+    private chatService: ChatService,
+    private wsService: WebSocketService,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => this.friend = params['name']);
-    const username = this.cookieService.get('username');
-    const token = this.cookieService.get('token');
-    if (username.length === 0 || token.length === 0 || this.friend.length === 0) {
+
+    if (!this.configService.isLoggedIn() || this.friend.length === 0) {
       this.router.navigate(['/login']);
       return;
     }
 
-    this.chatService.setUsername(username);
-    this.chatService.setToken(token);
-    this.chatService.setFriendUsername(this.friend);
+    this.wsService.init();
+    this.wsService.authenticate();
 
-    this.chatService.getMessages()
-      .subscribe(data => {
-        this.messages = (<any>data).messages;
-        for (const message of this.messages) {
-          const tmp = new Date(message[3]);
-          message[3] = tmp.getHours() + ':' + tmp.getMinutes();
+    this.loadMessages();
+
+    this.wsService.refreshAllReceived()
+      .subscribe(() => { this.loadMessages(); });
+
+    this.wsService.refreshFriendsReceived(this.friend)
+      .subscribe(res => {
+        if (res[0] === 'deleted') {
+          if (res[1] !== this.configService.getUsername()) {
+            this.snackBar.open('The other user blocked you', 'OK');
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         }
-      }, err => alert(err));
+      });
   }
+
+  loadMessages() {
+    this.messages = new ChatDataSource(this.chatService, this.wsService, this.friend);
+  }
+
+  sendMsg() {
+    const txt = (<any>document.getElementById('txtMsg'));
+    const msg: string = txt.value;
+    txt.value = '';
+    if (msg.length === 0) {
+      return;
+    }
+
+    this.wsService.sendUserMsg(this.friend, msg);
+  }
+
+  blockUser() {
+    this.chatService.blockUser(this.friend)
+      .subscribe(
+        () => { },
+        err => {
+          this.snackBar.open(err, 'OK', {
+            duration: 5000
+          });
+        }
+      );
+  }
+
+  scrollToBottom() {
+    // bad workaround
+    setTimeout(() => document.getElementById('tHistory').scrollIntoView(false), 200);
+  }
+}
+
+export class ChatDataSource extends DataSource<any> {
+  messages = new BehaviorSubject<Message[]>([]);
+
+  constructor(
+    private chatService: ChatService,
+    private wsService: WebSocketService,
+    private friend: string
+  ) {
+    super();
+    this.chatService.getUserMessages(this.friend)
+      .subscribe(messages => this.messages.next(this.messages.getValue().concat(messages)));
+    this.wsService.userMsgReceived(this.friend).subscribe(messages => this.messages.next(this.messages.getValue().concat(messages)));
+  }
+
+  connect(): Observable<Message[]> {
+    return this.messages.asObservable();
+  }
+
+  disconnect() { }
 }

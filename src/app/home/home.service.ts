@@ -2,46 +2,61 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, retry } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ConfigService } from '../config.service';
 
 @Injectable()
 export class HomeService {
-    serverURL = 'http://localhost:3000';
-    groupsURL = this.serverURL + '/groups';
-    friendsURL = this.serverURL + '/friends';
-    username: string;
-    token: string;
+    constructor(private http: HttpClient, private configService: ConfigService) { }
 
-    constructor(private http: HttpClient) { }
-
-    handleError(error: HttpErrorResponse) {
-        console.error(error);
-        if (error.error instanceof ErrorEvent) {
-            return throwError('Unable to get data');
-        } else {
-            return throwError('Server error, please contact the server admin');
-        }
+    handleError(reqType: string) {
+        return err => {
+            console.error(err);
+            if (err.error instanceof ErrorEvent) {
+                return throwError('Unable to get data');
+            } else {
+                return throwError('Server error, please contact the server admin');
+            }
+        };
     }
 
-    setUsername(username: string) { this.username = username; }
-    setToken(token: string) { this.token = token; }
-
     getGroups() {
-        return this.http.get(this.groupsURL , {
+        return this.http.get(this.configService.userGroupsURL, {
             headers: {
-                'authorization': JSON.stringify({ name: this.username, token: this.token })
+                'authorization': this.configService.getAuthHeader()
             }
         }).pipe(
             retry(3),
-            catchError(this.handleError));
+            catchError(this.handleError('getGroup')));
     }
 
     getFriends() {
-        return this.http.get(this.friendsURL , {
+        return this.http.get(this.configService.userFriendsURL, {
             headers: {
-                'authorization': JSON.stringify({ name: this.username, token: this.token })
+                'authorization': this.configService.getAuthHeader()
             }
         }).pipe(
             retry(3),
-            catchError(this.handleError));
+            catchError(this.handleError('getFriends')));
+    }
+
+    acceptFriendReq(friend: string) {
+        return this.http.patch(this.configService.friendsURL + '/' + friend, {}, {
+            headers: {
+                'authorization': this.configService.getAuthHeader()
+            }
+        }).pipe(
+            retry(3),
+            catchError(this.handleError('acceptFriendReq')));
+    }
+
+    acceptGroupReq(group: number) {
+        return this.http.patch(this.configService.groupsURL + '/' + group + '/accept', {}, {
+            headers: {
+                'authorization': this.configService.getAuthHeader()
+            }
+        }).pipe(
+            retry(3),
+            catchError(this.handleError('acceptGroupReq'))
+        );
     }
 }

@@ -1,7 +1,17 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>ChatApp</span>
+        <a routerLink="/home" routerLinkActive="active">Chat App</a>
         <span class="spacer"></span>
-        <button mat-raised-button color="secondary" (click)="logout()">Logout</button>
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">
+                <span>Logout</span>
+            </button>
+            <button mat-menu-item (click)="navigateToAccount()">
+                <span>Account</span>
+            </button>
+        </mat-menu>
     </mat-toolbar-row>
 </mat-toolbar>

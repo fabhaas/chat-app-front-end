@@ -4,6 +4,12 @@
     margin: 15px;
 }
 
-.login_form > * {
-    margin: 10px;
+.login_form * {
+    margin: 5px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 70px auto 90px;
+    grid-template-rows: 36
 }

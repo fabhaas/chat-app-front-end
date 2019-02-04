@@ -1,0 +1,9 @@
+.account_form {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.account_form * {
+    margin: 5px;
+}

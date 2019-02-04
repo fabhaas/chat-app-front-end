@@ -1,8 +1,50 @@
 .chat {
-    margin: 20px;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    align-items: center;
 }
 
-mat-chip {
+.history {
+    margin: 20px;
+    width: 100%;
+    max-height: calc(100vh - 110px);
+    overflow: auto;
+}
+
+.history table {
+    width: 100%;
+}
+
+.sendarea form {
+    display: grid;
+    grid-template-columns: auto 80px;
+}
+
+.sendarea form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sendarea form button {
+    margin-left: 10px;
+}
+
+mat-expansion-panel {
+    overflow: visible;
+    z-index : 100;
+    position: absolute;
+    top: 7px;
+    left: calc(50vw - 250px);
+    right: calc(50vw - 250px);
+    width: 500px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.center {
+    margin-top: 20px;
     text-align: center;
-    height: 50px;
 }

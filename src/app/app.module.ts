@@ -5,18 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { MatToolbarModule,
-  MatIconModule, MatInputModule, MatCardModule, MatButtonModule, MatListModule, MatChipsModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import {
+  MatToolbarModule, MatIconModule, MatInputModule,
+  MatCardModule, MatButtonModule, MatListModule,
+  MatSnackBarModule, MatTableModule, MatMenuModule,
+  MatDialogModule, MatStepperModule, MatSelectModule,
+  MatChipsModule, MatAutocompleteModule, MatExpansionModule} from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './login/login.service';
-import { CookieService } from 'ngx-cookie-service';
 import { HomeService } from './home/home.service';
 import { GroupChatComponent } from './groupchat/groupchat.component';
 import { TopbarComponent } from './topbar/topbar.component';
-import { ChatService } from './chat/chat.service';
+import { ChatService } from './chat.service';
+import { WebSocketService } from './websocket.service';
+import { AccountComponent } from './account/account.component';
+import { ChangeNameComponent } from './dialogs/change-name.component';
+import { AccountService } from './account/account.service';
+import { ChangePasswordComponent } from './dialogs/change-password.component';
+import { AcceptReqComponent } from './dialogs/accept-req.component';
+import { AddchatComponent } from './addchat/addchat.component';
+import { AddChatService } from './addchat/addchat.service';
+import { ConfigService } from './config.service';
+import { AddGroupMemberComponent } from './dialogs/add-group-member.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +38,19 @@ import { ChatService } from './chat/chat.service';
     ChatComponent,
     HomeComponent,
     GroupChatComponent,
-    TopbarComponent
+    TopbarComponent,
+    AccountComponent,
+    ChangeNameComponent,
+    ChangePasswordComponent,
+    AcceptReqComponent,
+    AddchatComponent,
+    AddGroupMemberComponent
+  ],
+  entryComponents: [
+    ChangeNameComponent,
+    ChangePasswordComponent,
+    AcceptReqComponent,
+    AddGroupMemberComponent
   ],
   imports: [
     BrowserModule,
@@ -39,13 +64,25 @@ import { ChatService } from './chat/chat.service';
     MatCardModule,
     MatButtonModule,
     MatListModule,
-    MatChipsModule
+    MatTableModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatStepperModule,
+    MatSelectModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
+    ReactiveFormsModule
   ],
   providers: [
     LoginService,
-    CookieService,
     HomeService,
-    ChatService
+    ChatService,
+    WebSocketService,
+    AccountService,
+    AddChatService,
+    ConfigService
   ],
   bootstrap: [AppComponent]
 })
