@@ -1,5 +1,18 @@
 # ChatApp - FrontEnd
 
+## NOTES
+### When using the webapp
+I'm sorry, the code is not well documentated :(.
+#### Home
+The entries on top of the divider are the chats with other users.
+
+The other entries are the group chats.
+
+The icon on the right indicates the current status of the chat. One tick means you sent a request to write, two ticks mean that you can chat, a callsign indicates that you received a request to chat.
+
+#### Group chat
+When a member is written in an italic font-style, then the member has not accepted the request to join the group.
+
 ## Installation
 Install [Angular CLI](https://cli.angular.io/).
 
