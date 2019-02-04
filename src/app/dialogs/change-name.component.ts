@@ -14,7 +14,7 @@ interface ChangeNameData {
     templateUrl: 'change-name.component.html',
 })
 export class ChangeNameComponent {
-    private newname = '';
+    newname = '';
 
     constructor(
         private dialogRef: MatDialogRef<ChangeNameComponent>,

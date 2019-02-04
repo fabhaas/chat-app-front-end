@@ -12,15 +12,15 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./addchat.component.css']
 })
 export class AddchatComponent implements OnInit {
-  private chooseTypeGroup: FormGroup;
-  private configGroup: FormGroup;
-  private types = ['Create group', 'Start chat with user'];
-  private selectedType: 'Create group' | 'Start chat with user';
+  types = ['Create group', 'Start chat with user'];
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  configGroup: FormGroup;
+  chooseTypeGroup: FormGroup;
+  selectedType: 'Create group' | 'Start chat with user';
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   private groupMembers = new Array<string>();
-  private selectable = true;
-  private removable = true;
-  private addOnBlur = true;
   // private friends = new Array<string>(); // part of not working autocomplete
 
   constructor(

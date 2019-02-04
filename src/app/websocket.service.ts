@@ -42,9 +42,10 @@ export class WebSocketService {
         });
 
         this.ws.subscribe(
-            msg => { console.log(msg); },
+            // enable when debbuging
+            /*msg => { console.log(msg); },
             err => { console.error(err); },
-            () => { console.log('WebSocket closed!'); }
+            () => { console.log('WebSocket closed!'); }*/
         );
         this.restarting = false;
     }

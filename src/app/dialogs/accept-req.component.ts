@@ -16,7 +16,7 @@ export class AcceptReqComponent {
 
     constructor(
         private dialogRef: MatDialogRef<AcceptReqComponent>,
-        @Inject(MAT_DIALOG_DATA) private data: AcceptReqDialogData,
+        @Inject(MAT_DIALOG_DATA) public data: AcceptReqDialogData,
         private homeService: HomeService,
         private snackBar: MatSnackBar
     ) { }

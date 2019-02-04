@@ -8,12 +8,12 @@ import { ConfigService } from '../config.service';
     templateUrl: 'change-password.component.html',
 })
 export class ChangePasswordComponent {
-    private oldPassword = '';
-    private newPassword0 = '';
-    private newPassword1 = '';
-    private oldHide = true;
-    private newHide0 = true;
-    private newHide1 = true;
+    oldPassword = '';
+    newPassword0 = '';
+    newPassword1 = '';
+    oldHide = true;
+    newHide0 = true;
+    newHide1 = true;
 
     constructor(
         private dialogRef: MatDialogRef<ChangePasswordComponent>,

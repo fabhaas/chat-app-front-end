@@ -10,9 +10,9 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  private hide = true;
-  private username = '';
-  private password = '';
+  hide = true;
+  username = '';
+  password = '';
 
   constructor(
     private loginService: LoginService,

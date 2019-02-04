@@ -9,11 +9,11 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
     templateUrl: 'add-group-member.component.html',
 })
 export class AddGroupMemberComponent {
-    private selectable = true;
-    private removable = true;
-    private addOnBlur = true;
+    addOnBlur = true;
+    newmembers = new Array<string>();
+    selectable = true;
+    removable = true;
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-    private newmembers = new Array<string>();
 
     constructor(
         private dialogRef: MatDialogRef<AddGroupMemberComponent>,

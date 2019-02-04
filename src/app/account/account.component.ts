@@ -11,7 +11,7 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-  private username: string;
+  username: string;
   constructor(private configService: ConfigService, private router: Router, private matDialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit() {

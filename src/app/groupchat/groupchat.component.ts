@@ -15,13 +15,13 @@ import { AddGroupMemberComponent } from '../dialogs/add-group-member.component';
   styleUrls: ['./groupchat.component.css']
 })
 export class GroupChatComponent implements OnInit {
-  private isGroupOwner = false;
-  private groupid: number;
-  private groupmembers = new Array<any[]>();
-  private group: any[];
-  private messages: GroupChatDataSource;
-  private leavingGroup = false;
+  isGroupOwner = false;
+  groupmembers = new Array<any[]>();
+  group: any[];
+  messages: GroupChatDataSource;
   displayedColumns = ['user', 'msg', 'timestamp'];
+  private groupid: number;
+  private leavingGroup = false;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
