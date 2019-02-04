@@ -1,12 +1,13 @@
-# FrontEnd
+# ChatApp - FrontEnd
 
 ## Installation
+Install [Angular CLI](https://cli.angular.io/).
 
+For Windows only: add the Angular CLI to the PATH enviroment variable.
 
+Run `npm install` in the main directory. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
-
-## Development server
+## Open development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
