@@ -7,6 +7,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 @Component({
     selector: 'app-dialog-add-group-member',
     templateUrl: 'add-group-member.component.html',
+    styles: [ '.fill { width: 100%; }' ]
 })
 export class AddGroupMemberComponent {
     addOnBlur = true;

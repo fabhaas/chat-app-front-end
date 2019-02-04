@@ -1,15 +1,18 @@
 <h1 mat-dialog-title>Change username</h1>
-<div mat-dialog-content>
-  <mat-form-field class="fill">
-    <mat-chip-list #chipList>
-      <mat-chip *ngFor="let member of newmembers" [selectable]="selectable" [removable]="removable" (removed)="remove(member)">
-        {{member}}
-        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-      </mat-chip>
-      <input id="txtMembers" placeholder="New group members (press enter to seperate)" [matChipInputFor]="chipList"
-        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-    </mat-chip-list>
-  </mat-form-field>
+<div class="fill">
+  <div mat-dialog-content>
+    <mat-form-field class="fill">
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let member of newmembers" [selectable]="selectable" [removable]="removable" (removed)="remove(member)">
+          {{member}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input id="txtMembers" placeholder="New group members (press enter to seperate)" [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>

@@ -138,7 +138,7 @@ export class GroupChatComponent implements OnInit {
 
   addGroupMembers() {
     const dialogRef = this.matDialog.open(AddGroupMemberComponent, {
-      width: '250px',
+      width: '500px',
       data: this.groupid
     });
 
