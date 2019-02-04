@@ -1,0 +1,23 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+}
+
+a:link {
+    color: white;
+}
+  
+a:hover {
+    color: grey;
+}  
+  
+a:active {
+  color: grey;
+}

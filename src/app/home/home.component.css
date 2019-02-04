@@ -1,0 +1,9 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+#btnAdd {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+}

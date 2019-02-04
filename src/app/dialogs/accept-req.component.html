@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Accept</h1>
+<div mat-dialog-content>
+  <p *ngIf="data.reqType === 'friend request'; else groupReqText">
+    Do you want to accept request to write with you from {{data.reqFromName}}?
+  </p>
+  <ng-template #groupReqText>
+    Do you want to accept the request to join the group "{{data.reqFromName}}"?
+  </ng-template>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="change()" cdkFocusInitial>Yes</button>
+</div>

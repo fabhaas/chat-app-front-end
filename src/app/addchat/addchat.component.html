@@ -1,0 +1,65 @@
+<div class="addchat_form">
+  <mat-card style="width: 75%">
+    <mat-card-header>
+      <mat-card-title> Add chat </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-vertical-stepper linear="true" #stepper>
+        <mat-step [stepControl]="chooseTypeGroup">
+          <form [formGroup]="chooseTypeGroup">
+            <ng-template matStepLabel>Choose the type</ng-template>
+            <mat-form-field>
+              <mat-select placeholder="Select type" formControlName="cbType">
+                <mat-option *ngFor="let option of types" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div>
+              <button mat-button (click)="selectType()" matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="configGroup">
+          <form [formGroup]="configGroup">
+            <ng-template matStepLabel>Configure</ng-template>
+            <div *ngIf="selectedType === 'Create group'; else friendReq">
+              <mat-form-field>
+                <input matInput placeholder="Name" formControlName="txtName" required>
+              </mat-form-field>
+              <mat-form-field class="fill">
+                  <mat-chip-list formControlName="chMembers" #chipList>
+                    <mat-chip *ngFor="let member of groupMembers" [selectable]="selectable"
+                             [removable]="removable" (removed)="remove(member)">
+                      {{member}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input id="txtMembers" formControlName="txtMembers" placeholder="Group members (press enter to seperate)"
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="addOnBlur"
+                           (matChipInputTokenEnd)="add($event)">
+                  </mat-chip-list>
+                  <!-- part of not working autocomplete
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoComplSelected($event)">
+                      <mat-option *ngFor="let member of friends" [value]="member">
+                        {{member}}
+                      </mat-option>
+                    </mat-autocomplete>-->
+                </mat-form-field>
+            </div>
+            <ng-template #friendReq>
+              <mat-form-field>
+                <input matInput placeholder="Name of user" formControlName="txtName" required>
+              </mat-form-field>
+            </ng-template>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="finish()">Finish</button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>

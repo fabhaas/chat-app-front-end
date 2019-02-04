@@ -1,0 +1,14 @@
+.addchat_form {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+    width: 75%;
+}
+
+.addchat_form * {
+    margin: 5px;
+}
+
+.fill {
+    width: 100%;
+}

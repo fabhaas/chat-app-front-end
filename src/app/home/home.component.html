@@ -1,0 +1,14 @@
+<mat-action-list>
+    <button style="text-align: center" mat-list-item *ngFor="let friend of friends" (click)="openFriend(friend)"> <span>
+            {{friend[0]}} </span> <span class="spacer"></span>
+        <mat-icon mat-suffix>
+            {{friend[1] ? (friend[2] ? 'done_all' : 'done') : 'priority_high'}} </mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-list-item *ngFor="let group of groups" (click)="openGroup(group)"> <span> {{group[1]}} </span> <span
+            class="spacer"></span>
+        <mat-icon mat-suffix>
+            {{group[3] ? 'done_all' : 'priority_high'}} </mat-icon>
+    </button>
+</mat-action-list>
+<button id="btnAdd" mat-fab color="primary" (click)="addChat()"><mat-icon>add</mat-icon></button>
