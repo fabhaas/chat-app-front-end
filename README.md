@@ -13,6 +13,9 @@ The icon on the right indicates the current status of the chat. One tick means y
 #### Group chat
 When a member is written in an italic font-style, then the member has not accepted the request to join the group.
 
+### TODO
+Add possibility to delete account
+
 ## Installation
 Install [Angular CLI](https://cli.angular.io/).
 
